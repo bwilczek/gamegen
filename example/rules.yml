@@ -1,0 +1,57 @@
+attributes:
+  money:
+    kind: item
+    type: int
+    initial: 3
+  strength:
+    kind: trait
+    type: int
+    initial: 2
+  luck:
+    kind: trait
+    type: int
+    initial: 3
+  has_cheated:
+    kind: meta
+    type: bool
+    initial: false
+constants:
+  ticket_price: 3
+characters:
+  warrior:
+    attributes:
+      money: -1
+      strength: +2
+      luck: -1
+scenes:
+  enter_tram:
+    pre: character == warrior
+    start: true
+    text: You hop on a tram. A decent person would most likely buy a ticket.
+    image: /path/to/image.png
+    actions:
+      buy_ticket:
+        pre: money >= $ticket_price
+        on_unmet_pre: hidden | inactive | verbose
+        text: Of course I buy one!
+        update:
+          - money -= $ticket_price
+        next_scene: arrival
+      dont_buy_ticket:
+        text: I like my money in my pocket. And I see no ticket inspector around.
+        trial: rand() + luck > 10
+        variants:
+          success:
+            message: You were lucky. There was indeed no ticket inspector around.
+            next_scene: arrival
+            update:
+              - has_cheated = true
+          failure:
+            message: Wrong. The ticket inspector was hiding right behind you. And you got what you deserved. Cheater.
+            next_scene: jail
+            update:
+              - has_cheated = true
+  arrival:
+    text: Welcome to your destination. You won the game.
+  jail:          
+    text: Welcome to jail. There's no way out from here.
