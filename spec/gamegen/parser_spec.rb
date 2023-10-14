@@ -27,10 +27,10 @@ RSpec.describe(Gamegen::Parser) do
 
     describe 'assignment' do
       describe 'valid integer' do
-        let(:input) { 'strength = 8' }
+        let(:input) { '$strength = 8' }
 
         specify do
-          expect(result).to be_a(Hash)
+          expect(result).to include(Lex::Token)
         end
       end
     end

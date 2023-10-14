@@ -19,8 +19,11 @@ Gem::Specification.new do |s|
   end
   s.require_path = 'lib'
 
+  s.add_dependency 'lex'
+
   s.add_development_dependency 'pry'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'rubocop'
   s.add_development_dependency 'rubocop-rspec'
+  s.metadata['rubygems_mfa_required'] = 'true'
 end

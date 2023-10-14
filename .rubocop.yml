@@ -2,18 +2,21 @@ require:
  - rubocop-rspec
 Gemspec/RequiredRubyVersion:
   Exclude:
-    - 'syrphid.gemspec'
+    - '*.gemspec'
 AllCops:
   SuggestExtensions: false
   DisplayCopNames: true
   TargetRubyVersion: 3.2.1
-Documentation:
-  Enabled: false
+  NewCops: enable
 Metrics/BlockLength:
-  IgnoredMethods: ['describe', 'context', 'specify']
+  Exclude:
+    - '*.gemspec'
+    - 'spec/**/_spec.rb'
 RSpec/NestedGroups:
   Max: 5
 RSpec/MultipleMemoizedHelpers:
   Max: 10
-Documentation:
+Style/Documentation:
   Enabled: false
+Gemspec/DevelopmentDependencies:
+  EnforcedStyle: gemspec
