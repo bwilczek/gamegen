@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = '0.0.1'
   s.author      = ['Bartek Wilczek']
   s.email       = ['bartek.wilczek@toptal.com']
-  s.homepage    = 'http://github.com/toptal/syrgemegenphid'
+  s.homepage    = 'http://github.com/toptal/gemegen'
   s.summary     = 'Generator of paragraph games'
   s.description = 'Generate the game as interactive HTML, from the provided YML manifest.'
   s.license     = 'MIT'

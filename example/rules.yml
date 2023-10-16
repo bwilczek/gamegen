@@ -17,6 +17,11 @@ attributes:
     initial: false
 constants:
   ticket_price: 3
+enums:
+  colors:
+    - red
+    - green
+    - blue
 characters:
   warrior:
     attributes:
@@ -31,15 +36,21 @@ scenes:
     image: /path/to/image.png
     actions:
       buy_ticket:
-        pre: money >= $ticket_price
+        pre: money >= ticket_price
         on_unmet_pre: hidden | inactive | verbose
         text: Of course I buy one!
         update:
-          - money -= $ticket_price
+          - money -= ticket_price
         next_scene: arrival
       dont_buy_ticket:
         text: I like my money in my pocket. And I see no ticket inspector around.
-        trial: rand() + luck > 10
+        trial:
+          threshold: 10
+          modifiers:
+            - condition: character == warrior
+              value: -1
+            - condition: character == mage
+              value: 2
         variants:
           success:
             message: You were lucky. There was indeed no ticket inspector around.
@@ -53,5 +64,5 @@ scenes:
               - has_cheated = true
   arrival:
     text: Welcome to your destination. You won the game.
-  jail:          
+  jail:
     text: Welcome to jail. There's no way out from here.
