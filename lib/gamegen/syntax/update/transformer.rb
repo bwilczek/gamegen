@@ -17,26 +17,14 @@ module Gamegen
         end
       end
 
-      IntLit = Struct.new(:int) do
-        def eval
-          int.to_i
-        end
-      end
-
-      IdentifierLit = Struct.new(:identifier) do
-        def eval
-          identifier.to_s
-        end
-      end
-
       class Transformer < Parslet::Transform
         rule(
           int: simple(:int)
-        ) { IntLit.new(int) }
+        ) { Gamegen::Context.renderer.for_int(int) }
 
         rule(
           identifier: simple(:identifier)
-        ) { IdentifierLit.new(identifier) }
+        ) { Gamegen::Context.renderer.for_identifier(identifier) }
 
         rule(
           assignment: subtree(:assignment)
@@ -46,13 +34,6 @@ module Gamegen
           left: simple(:left),
           right: simple(:right)
         ) { Assignment.new(left, right) }
-
-        def initialize(variables:, constants:, enums:)
-          super
-          @variables = variables
-          @constants = constants
-          @enums = enums
-        end
       end
     end
   end
