@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     gemegen (0.0.1)
-      lex
+      parslet
 
 GEM
   remote: https://rubygems.org/
@@ -13,12 +13,12 @@ GEM
     diff-lcs (1.5.0)
     json (2.6.3)
     language_server-protocol (3.17.0.3)
-    lex (0.1.0)
     method_source (1.0.0)
     parallel (1.23.0)
     parser (3.2.2.4)
       ast (~> 2.4.1)
       racc
+    parslet (2.0.0)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)

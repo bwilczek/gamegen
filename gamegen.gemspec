@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   end
   s.require_path = 'lib'
 
-  s.add_dependency 'lex'
+  s.add_dependency 'parslet'
 
   s.add_development_dependency 'pry'
   s.add_development_dependency 'rspec'
