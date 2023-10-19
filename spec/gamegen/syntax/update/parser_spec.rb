@@ -12,8 +12,8 @@ RSpec.describe(Gamegen::Syntax::Update::Parser) do
       let(:input) { 'strength1 = 8' }
 
       specify do # rubocop:disable RSpec/MultipleExpectations
-        expect(result.dig(:assignment, :left, :identifier)).to eq('strength1')
-        expect(result.dig(:assignment, :right, :int)).to eq('8')
+        expect(result.dig(:left, :identifier)).to eq('strength1')
+        expect(result.dig(:right, :int)).to eq('8')
       end
     end
 
@@ -21,8 +21,8 @@ RSpec.describe(Gamegen::Syntax::Update::Parser) do
       let(:input) { 'success_2 = true' }
 
       specify do # rubocop:disable RSpec/MultipleExpectations
-        expect(result.dig(:assignment, :left, :identifier)).to eq('success_2')
-        expect(result.dig(:assignment, :right, :bool)).to eq('true')
+        expect(result.dig(:left, :identifier)).to eq('success_2')
+        expect(result.dig(:right, :bool)).to eq('true')
       end
     end
   end

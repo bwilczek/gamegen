@@ -11,9 +11,9 @@ RSpec.describe(Gamegen::Syntax::Update::Transformer) do
   let(:renderer) { Gamegen::Renderer::Javascript.new }
   let(:variables) do
     {
-      'strength' => { type: :int, initial: 3 },
-      'cat_lover' => { type: :bool, initial: true },
-      'character' => { type: :characters, initial: :mage }
+      'strength' => { 'type' => 'int', 'initial' => 3 },
+      'cat_lover' => { 'type' => 'bool', 'initial' => true },
+      'character' => { 'type' => 'characters', 'initial' => 'mage' }
     }
   end
   let(:constants) do

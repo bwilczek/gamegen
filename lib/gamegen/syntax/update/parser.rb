@@ -14,10 +14,13 @@ module Gamegen
         rule(:bool) { (bool_true | bool_false).as(:bool) >> space? }
         rule(:integer) { match('[0-9]').repeat(1).as(:int) >> space? }
         rule(:identifier) { match['[a-z][a-z0-9_]'].repeat(1).as(:identifier) >> space? }
-        rule(:op_assign) { match('[=]') >> space? }
+        rule(:op_assign) { str('=') }
+        rule(:op_increment) { str('+=') }
+        rule(:op_decrement) { str('-=') }
+        rule(:operator) { op_assign | op_increment | op_decrement }
         rule(:value) { integer | bool | identifier }
 
-        rule(:assignment) { (identifier.as(:left) >> op_assign >> value.as(:right)).as(:assignment) }
+        rule(:assignment) { identifier.as(:left) >> operator.as(:operator) >> space? >> value.as(:right) }
         root(:assignment)
       end
     end
