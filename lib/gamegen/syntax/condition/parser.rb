@@ -6,8 +6,6 @@ module Gamegen
   module Syntax
     module Condition
       class Parser < Parslet::Parser
-        # (strength >= 8) || ((character != mage) && (money == 20))
-
         rule(:space) { match('\s').repeat(1) }
         rule(:space?) { space.maybe }
         rule(:lparen) { str('(') >> space? }
@@ -32,7 +30,9 @@ module Gamegen
         rule(:basic_condition) { identifier.as(:left) >> cmp_operator >> value.as(:right) }
         rule(:condition_in_parens) { lparen >> basic_condition >> rparen }
 
-        rule(:logical_operation) { condition_in_parens.as(:left) >> logical_operator >> condition_in_parens.as(:right) }
+        rule(:logical_operand) { condition_in_parens | logical_operation_in_parens }
+        rule(:logical_operation) { logical_operand.as(:left) >> logical_operator >> logical_operand.as(:right) }
+        rule(:logical_operation_in_parens) { lparen >> logical_operation >> rparen }
 
         rule(:condition) { logical_operation | bool | basic_condition | condition_in_parens }
         root(:condition)

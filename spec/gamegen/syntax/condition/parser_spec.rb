@@ -38,12 +38,12 @@ RSpec.describe(Gamegen::Syntax::Condition::Parser) do
       end
     end
 
-    # describe 'complete expression' do
-    #   let(:input) { '(strength >= 8) || ((character != mage) && (money == 20))' }
+    describe 'complete expression' do
+      let(:input) { '(strength >= 8) || ((character != mage) && (money == 20))' }
 
-    #   specify do
-    #     expect(result.dig(:right, :operator)).to eq('&&')
-    #   end
-    # end
+      specify do
+        expect(result.dig(:right, :operator)).to eq('&&')
+      end
+    end
   end
 end
