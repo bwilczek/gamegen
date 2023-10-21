@@ -63,5 +63,13 @@ RSpec.describe(Gamegen::Syntax::Condition::Transformer) do
         expect(evaluated).to eq('(strength >= 8) && (strength > 2)')
       end
     end
+
+    describe 'nested logical condition' do
+      let(:input) { '(strength >= 8) || ((strength >= 8) && (strength >= 8))' }
+
+      specify do
+        expect(evaluated).to eq('(strength >= 8) || ((strength >= 8) && (strength >= 8))')
+      end
+    end
   end
 end
