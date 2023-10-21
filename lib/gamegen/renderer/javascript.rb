@@ -5,7 +5,7 @@ module Gamegen
     class Javascript
       DumbLiteral = Struct.new(:literal) do
         def eval
-          literal
+          literal.to_s
         end
       end
 
@@ -25,6 +25,19 @@ module Gamegen
         def eval
           validate
           "#{left.eval} = #{right.eval}"
+        end
+      end
+
+      Comparison = Struct.new(:left, :operator, :right) do
+        def validate
+          return if right.respond_to?(Gamegen::Context.variables[left.identifier.to_s]['type'])
+
+          raise "Incompatible type comparison for: #{Gamegen::Context.variables[left.identifier.to_s]['type']}"
+        end
+
+        def eval
+          validate
+          "#{left.eval} #{operator.eval} #{right.eval}"
         end
       end
 
@@ -51,6 +64,10 @@ module Gamegen
 
       def for_assignment(left, rigth)
         Assignment.new(left, rigth)
+      end
+
+      def for_comparison(left, operator, rigth)
+        Comparison.new(left, for_operator(operator), rigth)
       end
 
       def for_identifier(identifier)

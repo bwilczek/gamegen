@@ -17,10 +17,10 @@ module Gamegen
         rule(:op_assign) { str('=') }
         rule(:op_increment) { str('+=') }
         rule(:op_decrement) { str('-=') }
-        rule(:operator) { op_assign | op_increment | op_decrement }
+        rule(:operator) { (op_assign | op_increment | op_decrement).as(:operator) >> space? }
         rule(:value) { integer | bool | identifier }
 
-        rule(:assignment) { identifier.as(:left) >> operator.as(:operator) >> space? >> value.as(:right) }
+        rule(:assignment) { identifier.as(:left) >> operator >> value.as(:right) }
         root(:assignment)
       end
     end

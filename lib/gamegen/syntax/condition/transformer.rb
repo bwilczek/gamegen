@@ -2,9 +2,11 @@
 
 require 'parslet'
 
+require_relative '../../context'
+
 module Gamegen
   module Syntax
-    module Update
+    module Condition
       class Transformer < Parslet::Transform
         rule(
           int: simple(:int)
@@ -18,7 +20,7 @@ module Gamegen
           left: simple(:left),
           operator: simple(:operator),
           right: simple(:right)
-        ) { Gamegen::Context.renderer.for_assignment(left, right) }
+        ) { Gamegen::Context.renderer.for_comparison(left, operator, right) }
       end
     end
   end
