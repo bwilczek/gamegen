@@ -32,6 +32,7 @@ RSpec.describe(Gamegen::Syntax::Condition::Transformer) do
     Gamegen::Context.variables = variables
     Gamegen::Context.constants = constants
     Gamegen::Context.enums = enums
+    # puts parsed
   end
 
   describe '#apply' do
@@ -44,6 +45,22 @@ RSpec.describe(Gamegen::Syntax::Condition::Transformer) do
 
       specify do
         expect(evaluated).to eq('strength >= 8')
+      end
+    end
+
+    describe 'nested condition' do
+      let(:input) { '(strength >= 8)' }
+
+      specify do
+        expect(evaluated).to eq('strength >= 8')
+      end
+    end
+
+    describe 'and condition' do
+      let(:input) { '(strength >= 8) && (strength > 2)' }
+
+      specify do
+        expect(evaluated).to eq('(strength >= 8) && (strength > 2)')
       end
     end
   end

@@ -20,12 +20,12 @@ module Gamegen
         rule(:op_gte) { str('>=') }
         rule(:op_gt) { str('>') }
         rule(:op_lt) { str('<') }
-        rule(:cmp_operator) { (op_eq | op_neq | op_gte | op_lte | op_lt | op_gt).as(:operator) >> space? }
+        rule(:cmp_operator) { (op_eq | op_neq | op_gte | op_lte | op_lt | op_gt).as(:comparison_operator) >> space? }
         rule(:value) { integer | bool | identifier }
 
         rule(:op_and) { str('&&') }
         rule(:op_or) { str('||') }
-        rule(:logical_operator) { (op_and | op_or).as(:operator) >> space? }
+        rule(:logical_operator) { (op_and | op_or).as(:logical_operator) >> space? }
 
         rule(:basic_condition) { identifier.as(:left) >> cmp_operator >> value.as(:right) }
         rule(:condition_in_parens) { lparen >> basic_condition >> rparen }

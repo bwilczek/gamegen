@@ -13,7 +13,7 @@ RSpec.describe(Gamegen::Syntax::Condition::Parser) do
 
       specify do # rubocop:disable RSpec/MultipleExpectations
         expect(result.dig(:left, :identifier)).to eq('strength')
-        expect(result[:operator]).to eq('>=')
+        expect(result[:comparison_operator]).to eq('>=')
         expect(result.dig(:right, :int)).to eq('8')
       end
     end
@@ -23,7 +23,7 @@ RSpec.describe(Gamegen::Syntax::Condition::Parser) do
 
       specify do # rubocop:disable RSpec/MultipleExpectations
         expect(result.dig(:left, :identifier)).to eq('strength')
-        expect(result[:operator]).to eq('>=')
+        expect(result[:comparison_operator]).to eq('>=')
         expect(result.dig(:right, :int)).to eq('8')
       end
     end
@@ -32,9 +32,9 @@ RSpec.describe(Gamegen::Syntax::Condition::Parser) do
       let(:input) { '(strength >= 8) && (money < 3)' }
 
       specify do # rubocop:disable RSpec/MultipleExpectations
-        expect(result.dig(:left, :operator)).to eq('>=')
-        expect(result[:operator]).to eq('&&')
-        expect(result.dig(:right, :operator)).to eq('<')
+        expect(result.dig(:left, :comparison_operator)).to eq('>=')
+        expect(result[:logical_operator]).to eq('&&')
+        expect(result.dig(:right, :comparison_operator)).to eq('<')
       end
     end
 
@@ -42,7 +42,7 @@ RSpec.describe(Gamegen::Syntax::Condition::Parser) do
       let(:input) { '(strength >= 8) || ((character != mage) && (money == 20))' }
 
       specify do
-        expect(result.dig(:right, :operator)).to eq('&&')
+        expect(result.dig(:right, :logical_operator)).to eq('&&')
       end
     end
   end

@@ -41,6 +41,12 @@ module Gamegen
         end
       end
 
+      Logical = Struct.new(:left, :operator, :right) do
+        def eval
+          "(#{left.eval}) #{operator.eval} (#{right.eval})"
+        end
+      end
+
       IdentifierLiteral = Struct.new(:identifier) do
         def validate
           return if Gamegen::Context.variables.keys.include?(identifier)
@@ -70,8 +76,16 @@ module Gamegen
         Comparison.new(left, for_operator(operator), rigth)
       end
 
+      def for_logical(left, operator, rigth)
+        Logical.new(left, for_operator(operator), rigth)
+      end
+
       def for_identifier(identifier)
         IdentifierLiteral.new(identifier)
+      end
+
+      def variables
+        Gamegen::Context.variables
       end
     end
   end

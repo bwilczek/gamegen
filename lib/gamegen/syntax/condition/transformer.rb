@@ -18,9 +18,15 @@ module Gamegen
 
         rule(
           left: simple(:left),
-          operator: simple(:operator),
+          comparison_operator: simple(:comparison_operator),
           right: simple(:right)
-        ) { Gamegen::Context.renderer.for_comparison(left, operator, right) }
+        ) { Gamegen::Context.renderer.for_comparison(left, comparison_operator, right) }
+
+        rule(
+          left: subtree(:left),
+          logical_operator: simple(:logical_operator),
+          right: subtree(:right)
+        ) { Gamegen::Context.renderer.for_logical(left, logical_operator, right) }
       end
     end
   end
