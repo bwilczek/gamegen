@@ -29,9 +29,9 @@ module Gamegen
 
       rule(
         left: simple(:left),
-        mod_operator: simple(:operator),
+        mod_operator: simple(:mod_operator),
         right: simple(:right)
-      ) { Gamegen::Context.renderer.for_assignment(left, right) }
+      ) { Gamegen::Context.renderer.for_assignment(left, mod_operator, right) }
     end
   end
 end

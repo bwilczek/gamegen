@@ -8,6 +8,15 @@ RSpec.describe(Gamegen::Syntax::Parser) do
   describe '#parse' do
     let(:result) { parser.parse(input) }
 
+    describe 'int incremental assignment' do
+      let(:input) { 'strength1 += 8' }
+
+      specify do # rubocop:disable RSpec/MultipleExpectations
+        expect(result.dig(:left, :identifier)).to eq('strength1')
+        expect(result.dig(:right, :int)).to eq('8')
+      end
+    end
+
     describe 'int literal assignment' do
       let(:input) { 'strength1 = 8' }
 

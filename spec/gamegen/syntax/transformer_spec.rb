@@ -78,5 +78,13 @@ RSpec.describe(Gamegen::Syntax::Transformer) do
         expect(evaluated).to eq('strength = 8')
       end
     end
+
+    describe 'integer incremental assignment' do
+      let(:input) { 'strength += 8' }
+
+      specify do
+        expect(evaluated).to eq('strength += 8')
+      end
+    end
   end
 end

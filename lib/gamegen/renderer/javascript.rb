@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Gamegen
-  module Renderer
+  class Renderer
     class Javascript
       DumbLiteral = Struct.new(:literal) do
         def eval
@@ -15,7 +15,7 @@ module Gamegen
         end
       end
 
-      Assignment = Struct.new(:left, :right) do
+      Assignment = Struct.new(:left, :operator, :right) do
         def validate
           return if right.respond_to?(Gamegen::Context.variables[left.identifier.to_s]['type'])
 
@@ -24,7 +24,7 @@ module Gamegen
 
         def eval
           validate
-          "#{left.eval} = #{right.eval}"
+          "#{left.eval} #{operator.eval} #{right.eval}"
         end
       end
 
@@ -68,16 +68,16 @@ module Gamegen
         DumbLiteral.new(operator)
       end
 
-      def for_assignment(left, rigth)
-        Assignment.new(left, rigth)
+      def for_assignment(left, operator, right)
+        Assignment.new(left, for_operator(operator), right)
       end
 
-      def for_comparison(left, operator, rigth)
-        Comparison.new(left, for_operator(operator), rigth)
+      def for_comparison(left, operator, right)
+        Comparison.new(left, for_operator(operator), right)
       end
 
-      def for_logical(left, operator, rigth)
-        Logical.new(left, for_operator(operator), rigth)
+      def for_logical(left, operator, right)
+        Logical.new(left, for_operator(operator), right)
       end
 
       def for_identifier(identifier)
