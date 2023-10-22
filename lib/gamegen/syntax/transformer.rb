@@ -12,6 +12,10 @@ module Gamegen
       ) { Gamegen::Context.renderer.for_int(int) }
 
       rule(
+        bool: simple(:bool)
+      ) { Gamegen::Context.renderer.for_bool(bool) }
+
+      rule(
         identifier: simple(:identifier)
       ) { Gamegen::Context.renderer.for_identifier(identifier) }
 

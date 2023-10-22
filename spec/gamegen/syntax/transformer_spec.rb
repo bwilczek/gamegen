@@ -88,5 +88,45 @@ RSpec.describe(Gamegen::Syntax::Transformer) do
         expect(evaluated).to eq('strength += 8')
       end
     end
+
+    describe 'assign to int literal' do
+      let(:input) { '12 = true' }
+
+      specify do
+        expect { evaluated }.to raise_error(Parslet::ParseFailed)
+      end
+    end
+
+    describe 'assign bool literal to int' do
+      let(:input) { 'strength = true' }
+
+      specify do
+        expect { evaluated }.to raise_error(Gamegen::Renderer::IncompatibleType, /Operands' type do not match/)
+      end
+    end
+
+    describe 'invalid comparison operator for boolean' do
+      let(:input) { 'cat_lover >= true' }
+
+      specify do
+        expect { evaluated }.to raise_error(Gamegen::Renderer::IncompatibleType, /Incorrect operand for boolean/)
+      end
+    end
+
+    describe 'undefined variable' do
+      let(:input) { 'spam = true' }
+
+      specify do
+        expect { evaluated }.to raise_error(Gamegen::Renderer::IncompatibleType, /Unknown identifier/)
+      end
+    end
+
+    describe 'undefined const' do
+      let(:input) { 'strength += spam' }
+
+      specify do
+        expect { evaluated }.to raise_error(Gamegen::Renderer::IncompatibleType, /Unknown identifier/)
+      end
+    end
   end
 end

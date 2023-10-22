@@ -15,6 +15,12 @@ module Gamegen
         end
       end
 
+      BoolLiteral = Struct.new(:bool) do
+        def eval
+          bool == 'true'
+        end
+      end
+
       Assignment = Struct.new(:left, :operator, :right) do
         def eval
           "#{left.eval} #{operator.eval} #{right.eval}"

@@ -12,6 +12,8 @@ Metrics/BlockLength:
   Exclude:
     - '*.gemspec'
     - 'spec/**/_spec.rb'
+Metrics/AbcSize:
+  Max: 20
 RSpec/NestedGroups:
   Max: 5
 RSpec/MultipleMemoizedHelpers:
