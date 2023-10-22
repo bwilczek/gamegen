@@ -56,7 +56,7 @@ module Gamegen
 
         def eval
           validate
-          identifier.to_s
+          "document.gamegen.#{identifier}"
         end
       end
 
