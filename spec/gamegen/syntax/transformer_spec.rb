@@ -2,13 +2,15 @@
 
 require 'gamegen/syntax/parser'
 require 'gamegen/syntax/transformer'
+require 'gamegen/renderer'
 require 'gamegen/renderer/ruby'
 require 'gamegen/context'
 
 RSpec.describe(Gamegen::Syntax::Transformer) do
   let(:transformer) { described_class.new }
   let(:parser) { Gamegen::Syntax::Parser.new }
-  let(:renderer) { Gamegen::Renderer::Ruby.new }
+  let(:renderer) { Gamegen::Renderer.new(renderer_views) }
+  let(:renderer_views) { Gamegen::Renderer::Ruby }
   let(:variables) do
     {
       'strength' => { 'type' => 'int', 'initial' => 3 },

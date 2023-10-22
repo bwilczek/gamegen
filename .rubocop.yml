@@ -15,7 +15,7 @@ Metrics/BlockLength:
 RSpec/NestedGroups:
   Max: 5
 RSpec/MultipleMemoizedHelpers:
-  Max: 10
+  Max: 15
 Style/Documentation:
   Enabled: false
 Gemspec/DevelopmentDependencies:
