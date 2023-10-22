@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require 'gamegen/syntax/condition/parser'
-require 'gamegen/syntax/condition/transformer'
-require 'gamegen/renderer/javascript'
+require 'gamegen/syntax/parser'
+require 'gamegen/syntax/transformer'
+require 'gamegen/renderer/ruby'
 require 'gamegen/context'
 
-RSpec.describe(Gamegen::Syntax::Condition::Transformer) do
+RSpec.describe(Gamegen::Syntax::Transformer) do
   let(:transformer) { described_class.new }
-  let(:parser) { Gamegen::Syntax::Condition::Parser.new }
-  let(:renderer) { Gamegen::Renderer::Javascript.new }
+  let(:parser) { Gamegen::Syntax::Parser.new }
+  let(:renderer) { Gamegen::Renderer::Ruby.new }
   let(:variables) do
     {
       'strength' => { 'type' => 'int', 'initial' => 3 },
@@ -32,7 +32,6 @@ RSpec.describe(Gamegen::Syntax::Condition::Transformer) do
     Gamegen::Context.variables = variables
     Gamegen::Context.constants = constants
     Gamegen::Context.enums = enums
-    # puts parsed
   end
 
   describe '#apply' do
@@ -69,6 +68,14 @@ RSpec.describe(Gamegen::Syntax::Condition::Transformer) do
 
       specify do
         expect(evaluated).to eq('(strength >= 8) || ((strength >= 8) && (strength >= 8))')
+      end
+    end
+
+    describe 'integer literal assignment' do
+      let(:input) { 'strength = 8' }
+
+      specify do
+        expect(evaluated).to eq('strength = 8')
       end
     end
   end
