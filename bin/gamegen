@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require_relative '../lib/gamegen/loader'
+require_relative '../lib/gamegen/context'
+
+context = Gamegen::Loader.new.load(ARGV[0])
+Gamegen::Context.load(context)

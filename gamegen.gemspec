@@ -13,6 +13,8 @@ Gem::Specification.new do |s|
   s.license     = 'MIT'
   s.required_ruby_version = '~> 3.2.0'
 
+  s.executables << 'gamegen'
+
   s.files = Dir['**/*'].reject do |f|
     f.start_with?('spec') ||
       File.directory?(f)

@@ -1,9 +1,24 @@
 # frozen_string_literal: true
 
+require 'forwardable'
+
 module Gamegen
   class Context
     class << self
-      attr_accessor :renderer, :variables, :constants, :enums
+      extend Forwardable
+      def_delegators :instance, # *instance_methods(false)
+                     :renderer, :variables, :constants, :enums, :scenes,
+                     :renderer=, :variables=, :constants=, :enums=, :scenes=
+
+      def instance
+        @instance ||= new
+      end
+
+      def load(context)
+        @instance = context
+      end
     end
+
+    attr_accessor :renderer, :variables, :constants, :enums, :scenes
   end
 end
