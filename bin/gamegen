@@ -3,6 +3,9 @@
 
 require_relative '../lib/gamegen/loader'
 require_relative '../lib/gamegen/context'
+require_relative '../lib/gamegen/renderer/javascript'
 
 context = Gamegen::Loader.new.load(ARGV[0])
+context.renderer = Gamegen::Renderer.new(Gamegen::Renderer::Javascript)
+
 Gamegen::Context.load(context)

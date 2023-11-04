@@ -7,8 +7,8 @@ module Gamegen
     class << self
       extend Forwardable
       def_delegators :instance, # *instance_methods(false)
-                     :renderer, :variables, :constants, :enums, :scenes,
-                     :renderer=, :variables=, :constants=, :enums=, :scenes=
+                     :renderer, :variables, :constants, :enums, :scenes, :characters,
+                     :renderer=, :variables=, :constants=, :enums=, :scenes=, :characters=
 
       def instance
         @instance ||= new

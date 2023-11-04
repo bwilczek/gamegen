@@ -16,7 +16,12 @@ attributes:
     type: bool
     initial: false
 constants:
-  ticket_price: 3
+  ticket_price:
+    type: int
+    value: 3
+  some_flag:
+    type: bool
+    value: true
 enums:
   colors:
     - red
@@ -28,6 +33,11 @@ characters:
       money: -1
       strength: +2
       luck: -1
+  mage:
+    attributes:
+      money: +4
+      strength: -3
+      luck: +1
 scenes:
   enter_tram:
     pre: character == warrior

@@ -20,7 +20,7 @@ RSpec.describe(Gamegen::Syntax::Transformer) do
   end
   let(:constants) do
     {
-      price: { type: :int, initial: 2 }
+      price: { 'type' => 'int', 'value' => 2 }
     }
   end
   let(:enums) do
